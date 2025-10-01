@@ -15,16 +15,17 @@ class MapScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("OpenStreetMap")),
+      appBar: AppBar(title: const Text("Map (MapTiler)")),
       body: FlutterMap(
         options: MapOptions(
           initialCenter: LatLng(latitude, longitude),
           initialZoom: 14,
         ),
         children: [
-          // Tile layer (OpenStreetMap)
+          // ✅ MapTiler tile layer
           TileLayer(
-            urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+            urlTemplate:
+                "https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=gvJVxOP19NCLPrlcwUX2",
             userAgentPackageName: 'com.example.app',
           ),
 

@@ -15,9 +15,7 @@ class Newscreen extends StatelessWidget {
           if (!snapshot.hasData) {
             return const Center(child: CircularProgressIndicator());
           }
-
           final docs = snapshot.data!.docs;
-
           return ListView.builder(
             itemCount: docs.length,
             itemBuilder: (context, index) {
