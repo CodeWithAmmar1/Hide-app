@@ -54,7 +54,7 @@ class _GameScreenState extends State<GameScreen> {
           },
 
           child: const Text(
-            'Tap the Square',
+            'TapperizZzo',
             style: TextStyle(color: Colors.white),
           ),
         ),
