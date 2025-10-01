@@ -31,10 +31,8 @@ class Newscreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => MapScreen(
-                          latitude: lat,
-                          longitude: lng,
-                        ),
+                        builder:
+                            (_) => MapScreen(latitude: lat, longitude: lng),
                       ),
                     );
                   },

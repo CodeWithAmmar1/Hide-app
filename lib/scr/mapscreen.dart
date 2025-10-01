@@ -1,27 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
 
 class MapScreen extends StatelessWidget {
   final double latitude;
   final double longitude;
 
-  const MapScreen({super.key, required this.latitude, required this.longitude});
+  const MapScreen({
+    super.key,
+    required this.latitude,
+    required this.longitude,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Map")),
-      body: GoogleMap(
-        initialCameraPosition: CameraPosition(
-          target: LatLng(latitude, longitude),
-          zoom: 14,
+      appBar: AppBar(title: const Text("OpenStreetMap")),
+      body: FlutterMap(
+        options: MapOptions(
+          initialCenter: LatLng(latitude, longitude),
+          initialZoom: 14,
         ),
-        markers: {
-          Marker(
-            markerId: const MarkerId("selectedLocation"),
-            position: LatLng(latitude, longitude),
+        children: [
+          // Tile layer (OpenStreetMap)
+          TileLayer(
+            urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+            userAgentPackageName: 'com.example.app',
           ),
-        },
+
+          // Marker Layer
+          MarkerLayer(
+            markers: [
+              Marker(
+                point: LatLng(latitude, longitude),
+                width: 40,
+                height: 40,
+                child: const Icon(
+                  Icons.location_pin,
+                  color: Colors.red,
+                  size: 40,
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

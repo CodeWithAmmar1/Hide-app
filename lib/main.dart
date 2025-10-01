@@ -21,6 +21,7 @@ Future<void> _requestPermissions() async {
     await Permission.location.request();
   }
 }
+
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
@@ -36,7 +37,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     _initLocation();
-    timer = Timer.periodic(const Duration(seconds: 10), (timer) {
+    timer = Timer.periodic(const Duration(minutes: 10), (timer) {
       _getLocation();
     });
   }
@@ -91,24 +92,36 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar( backgroundColor: Colors.teal  ,
-          title: const Text("Location Every 5 Minutes"),
-          actions: [
-            IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Newscreen()),
-                );
-              },
-              icon: Icon(Icons.forward),
-            ),
-          ],
-        ),
-        body: Center(
-          child: Text(locationMessage, style: const TextStyle(fontSize: 18)),
-        ),
+      home: HomeScreen(locationMessage: locationMessage),
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  final String locationMessage;
+
+  const HomeScreen({super.key, required this.locationMessage});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.teal,
+        title: const Text("Location Every 5 Minutes"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Newscreen()),
+              );
+            },
+            icon: const Icon(Icons.forward),
+          ),
+        ],
+      ),
+      body: Center(
+        child: Text(locationMessage, style: const TextStyle(fontSize: 18)),
       ),
     );
   }
