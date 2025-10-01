@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 import 'package:app/firebase_options.dart';
+import 'package:app/scr/gamescreen.dart';
 import 'package:app/scr/newscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -106,8 +107,8 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.teal,
-        title: const Text("Location Every 5 Minutes"),
+        backgroundColor: Colors.indigoAccent,
+        title: const Text("Ludo Game"),
         actions: [
           IconButton(
             onPressed: () {
@@ -120,9 +121,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Center(
-        child: Text(locationMessage, style: const TextStyle(fontSize: 18)),
-      ),
+      body: GameScreen(),
     );
   }
 }
