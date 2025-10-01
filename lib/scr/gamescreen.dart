@@ -43,6 +43,7 @@ class _GameScreenState extends State<GameScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: Colors.indigoAccent,
         title: GestureDetector(
           onDoubleTap: () {
@@ -52,10 +53,16 @@ class _GameScreenState extends State<GameScreen> {
             );
           },
 
-          child: const Text('Tap the Square',style: TextStyle(color: Colors.white),),
+          child: const Text(
+            'Tap the Square',
+            style: TextStyle(color: Colors.white),
+          ),
         ),
         actions: [
-          IconButton(icon: const Icon(Icons.refresh,color: Colors.white,), onPressed: startGame),
+          IconButton(
+            icon: const Icon(Icons.refresh, color: Colors.white),
+            onPressed: startGame,
+          ),
         ],
       ),
       body: Stack(
@@ -70,7 +77,7 @@ class _GameScreenState extends State<GameScreen> {
                   moveSquare();
                 });
               },
-              child: Image.asset("asset/TapMe-Logo.png", width: 80, height: 80)
+              child: Image.asset("asset/TapMe-Logo.png", width: 80, height: 80),
             ),
           ),
           Positioned(
