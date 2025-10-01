@@ -24,7 +24,7 @@ class Newscreen extends StatelessWidget {
               return ListTile(
                 title: Text("Lat: $lat, Lng: $lng"),
                 trailing: IconButton(
-                  icon: const Icon(Icons.map),
+                  icon: const Icon(Icons.person_pin_circle_outlined,color: Colors.red,),
                   onPressed: () {
                     Navigator.push(
                       context,

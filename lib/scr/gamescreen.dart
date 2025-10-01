@@ -52,10 +52,10 @@ class _GameScreenState extends State<GameScreen> {
             );
           },
 
-          child: const Text('Tap the Square'),
+          child: const Text('Tap the Square',style: TextStyle(color: Colors.white),),
         ),
         actions: [
-          IconButton(icon: const Icon(Icons.refresh), onPressed: startGame),
+          IconButton(icon: const Icon(Icons.refresh,color: Colors.white,), onPressed: startGame),
         ],
       ),
       body: Stack(
@@ -70,15 +70,15 @@ class _GameScreenState extends State<GameScreen> {
                   moveSquare();
                 });
               },
-              child: Image.asset("asset/TapMe-Logo.png")
+              child: Image.asset("asset/TapMe-Logo.png", width: 80, height: 80)
             ),
           ),
           Positioned(
             top: 20,
-            left: 20,
+            right: 20,
             child: Text(
               'Score: $score',
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
         ],

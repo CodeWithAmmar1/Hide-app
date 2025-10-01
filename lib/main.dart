@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 import 'package:app/firebase_options.dart';
 import 'package:app/scr/gamescreen.dart';
-import 'package:app/scr/newscreen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:firebase_core/firebase_core.dart';
