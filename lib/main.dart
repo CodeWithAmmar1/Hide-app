@@ -93,35 +93,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(locationMessage: locationMessage),
-    );
-  }
-}
-
-class HomeScreen extends StatelessWidget {
-  final String locationMessage;
-
-  const HomeScreen({super.key, required this.locationMessage});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.indigoAccent,
-        title: const Text("Ludo Game"),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Newscreen()),
-              );
-            },
-            icon: const Icon(Icons.forward),
-          ),
-        ],
-      ),
-      body: GameScreen(),
+      home: GameScreen(),
     );
   }
 }

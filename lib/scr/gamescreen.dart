@@ -1,7 +1,7 @@
-
 import 'dart:async';
 import 'dart:math';
 
+import 'package:app/scr/newscreen.dart';
 import 'package:flutter/material.dart';
 
 class GameScreen extends StatefulWidget {
@@ -43,12 +43,19 @@ class _GameScreenState extends State<GameScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Tap the Square'),
+        backgroundColor: Colors.indigoAccent,
+        title: GestureDetector(
+          onDoubleTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Newscreen()),
+            );
+          },
+
+          child: const Text('Tap the Square'),
+        ),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: startGame,
-          )
+          IconButton(icon: const Icon(Icons.refresh), onPressed: startGame),
         ],
       ),
       body: Stack(
@@ -63,11 +70,7 @@ class _GameScreenState extends State<GameScreen> {
                   moveSquare();
                 });
               },
-              child: Container(
-                width: 50,
-                height: 50,
-                color: Colors.red,
-              ),
+              child: Image.asset("asset/TapMe-Logo.png")
             ),
           ),
           Positioned(
