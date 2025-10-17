@@ -1,11 +1,12 @@
 import 'dart:async';
 import 'dart:developer';
 import 'package:app/firebase_options.dart';
-import 'package:app/scr/gamescreen.dart';
+import 'package:app/scr/music/homeview.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 void main() async {
@@ -90,9 +91,11 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return  GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: GameScreen(),
+      title: 'Music Player',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: const HomeView(),
     );
   }
 }

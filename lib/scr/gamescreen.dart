@@ -1,7 +1,5 @@
 import 'dart:async';
 import 'dart:math';
-
-import 'package:app/scr/newscreen.dart';
 import 'package:flutter/material.dart';
 
 class GameScreen extends StatefulWidget {
@@ -47,15 +45,20 @@ class _GameScreenState extends State<GameScreen> {
         backgroundColor: Colors.indigoAccent,
         title: GestureDetector(
           onDoubleTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const Newscreen()),
-            );
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(builder: (context) => 
+            //   // const Newscreen()
+            //   MusicPlayerScreen()
+            //   ),
+            // );
           },
 
           child: const Text(
             'TapperizZzo',
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.white
+            
+            ),
           ),
         ),
         actions: [
@@ -77,7 +80,7 @@ class _GameScreenState extends State<GameScreen> {
                   moveSquare();
                 });
               },
-              child: Image.asset("asset/TapMe-Logo.png", width: 80, height: 80),
+              child: Image.asset("assets/TapMe-Logo.png", width: 80, height: 80),
             ),
           ),
           Positioned(
