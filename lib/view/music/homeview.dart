@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:app/controller/playerController.dart';
-import 'package:app/view/map/newscreen.dart';
+import 'package:app/view/map/fetch.dart';
 import 'package:app/view/music/musicScreen.dart';
 import 'package:app/view/music/widget/songtiltle.dart';
 import 'package:flutter/material.dart';
@@ -15,15 +15,17 @@ class HomeView extends StatelessWidget {
     final controller = Get.put(PlayerController());
 
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(backgroundColor: Colors.orange,
         centerTitle: true,
         automaticallyImplyLeading: false,
         title: GestureDetector(
           onTap: () {
-            Get.to(() => const Newscreen());
+            Get.to(() => const Fetch());
             log("message");
           },
-          child: const Text('My Music Player'),
+          child: const Text('My Music Player',style: TextStyle(
+            color: Colors.black,fontWeight: FontWeight.bold
+          ),),
         ),
       ),
       body: Obx(() {
