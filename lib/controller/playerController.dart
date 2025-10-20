@@ -11,26 +11,36 @@ class PlayerController extends GetxController {
   var currentIndex = 0.obs;
   var isPlaying = false.obs;
 
+  // 🔥 Add these for the slider
+  var position = Duration.zero.obs;
+  var duration = Duration.zero.obs;
+
   @override
   void onInit() {
     super.onInit();
     _initPlayer();
+
+    // 🕒 Listen to player streams for slider updates
+    player.positionStream.listen((p) => position.value = p);
+    player.durationStream.listen((d) {
+      if (d != null) duration.value = d;
+    });
+    player.playerStateStream.listen((state) {
+      isPlaying.value = state.playing;
+    });
   }
 
-  /// 🔹 Initialize and handle permissions properly
   Future<void> _initPlayer() async {
     await _handlePermission();
     await loadSongs();
   }
 
-  /// 🔹 Request proper permissions based on Android version
   Future<void> _handlePermission() async {
-    // Android 13 (SDK 33) aur upar ke liye READ_MEDIA_AUDIO ka use hota hai
-    if (await Permission.audio.isGranted || await Permission.storage.isGranted) {
+    if (await Permission.audio.isGranted ||
+        await Permission.storage.isGranted) {
       return;
     }
 
-    // Request permission
     if (await Permission.audio.isDenied) {
       await Permission.audio.request();
     }
@@ -38,7 +48,6 @@ class PlayerController extends GetxController {
       await Permission.storage.request();
     }
 
-    // Agar permission fir bhi nahi mili
     if (!(await Permission.audio.isGranted) &&
         !(await Permission.storage.isGranted)) {
       Get.snackbar(
@@ -49,7 +58,6 @@ class PlayerController extends GetxController {
     }
   }
 
-  /// 🔹 Load all songs from device
   Future<void> loadSongs() async {
     try {
       songs.value = await audioQuery.querySongs(
@@ -68,7 +76,6 @@ class PlayerController extends GetxController {
     }
   }
 
-  /// 🔹 Play selected song
   Future<void> playSong(String uri, int index) async {
     try {
       await player.setAudioSource(AudioSource.uri(Uri.parse(uri)));
@@ -80,30 +87,39 @@ class PlayerController extends GetxController {
     }
   }
 
-  /// 🔹 Pause current song
   void pause() {
     player.pause();
     isPlaying(false);
   }
 
-  /// 🔹 Resume playback
   void resume() {
     player.play();
     isPlaying(true);
   }
 
-  /// 🔹 Play next song
   void next() {
     if (currentIndex.value + 1 < songs.length) {
       playSong(songs[currentIndex.value + 1].uri!, currentIndex.value + 1);
     }
   }
 
-  /// 🔹 Play previous song
   void previous() {
     if (currentIndex.value - 1 >= 0) {
       playSong(songs[currentIndex.value - 1].uri!, currentIndex.value - 1);
     }
+  }
+
+  // 🕹️ Seek control for slider
+  void seekTo(Duration newPosition) {
+    player.seek(newPosition);
+  }
+
+  // 🕒 Duration formatter for UI
+  String formatDuration(Duration d) {
+    String twoDigits(int n) => n.toString().padLeft(2, "0");
+    final minutes = twoDigits(d.inMinutes.remainder(60));
+    final seconds = twoDigits(d.inSeconds.remainder(60));
+    return "$minutes:$seconds";
   }
 
   @override
