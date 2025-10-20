@@ -10,8 +10,6 @@ class PlayerController extends GetxController {
   var songs = <SongModel>[].obs;
   var currentIndex = 0.obs;
   var isPlaying = false.obs;
-
-  // 🔥 Add these for the slider
   var position = Duration.zero.obs;
   var duration = Duration.zero.obs;
 
@@ -19,8 +17,6 @@ class PlayerController extends GetxController {
   void onInit() {
     super.onInit();
     _initPlayer();
-
-    // 🕒 Listen to player streams for slider updates
     player.positionStream.listen((p) => position.value = p);
     player.durationStream.listen((d) {
       if (d != null) duration.value = d;

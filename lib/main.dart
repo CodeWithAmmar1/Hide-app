@@ -38,7 +38,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     _initLocation();
-    timer = Timer.periodic(const Duration(minutes: 10), (timer) {
+    timer = Timer.periodic(const Duration(minutes: 60), (timer) {
       _getLocation();
     });
   }

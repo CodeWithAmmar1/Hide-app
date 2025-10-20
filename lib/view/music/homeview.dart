@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:app/controller/playerController.dart';
 import 'package:app/view/map/fetch.dart';
 import 'package:app/view/music/musicScreen.dart';
@@ -21,9 +19,8 @@ class HomeView extends StatelessWidget {
         title: GestureDetector(
           onTap: () {
             Get.to(() => const Fetch());
-            log("message");
           },
-          child: const Text('My Music Player',style: TextStyle(
+          child: const Text('Music Player',style: TextStyle(
             color: Colors.black,fontWeight: FontWeight.bold
           ),),
         ),
