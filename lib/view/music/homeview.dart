@@ -1,5 +1,4 @@
 import 'package:app/controller/playerController.dart';
-import 'package:app/view/map/fetch.dart';
 import 'package:app/view/music/musicScreen.dart';
 import 'package:app/view/music/widget/songtiltle.dart';
 import 'package:flutter/material.dart';
@@ -16,14 +15,9 @@ class HomeView extends StatelessWidget {
       appBar: AppBar(backgroundColor: Colors.orange,
         centerTitle: true,
         automaticallyImplyLeading: false,
-        title: GestureDetector(
-          onTap: () {
-            Get.to(() => const Fetch());
-          },
-          child: const Text('Music Player',style: TextStyle(
-            color: Colors.black,fontWeight: FontWeight.bold
-          ),),
-        ),
+        title: const Text('Music Player',style: TextStyle(
+          color: Colors.black,fontWeight: FontWeight.bold
+        ),),
       ),
       body: Obx(() {
         if (controller.songs.isEmpty) {
