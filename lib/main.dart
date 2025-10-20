@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 import 'package:app/firebase_options.dart';
-import 'package:app/view/music/homeview.dart';
+import 'package:app/view/spalsh/spalsh.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -95,7 +95,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'Music Player',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: const HomeView(),
+      home: const SplashScreen(),
     );
   }
 }
