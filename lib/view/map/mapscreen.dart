@@ -25,14 +25,12 @@ class MapScreen extends StatelessWidget {
           initialZoom: 14,
         ),
         children: [
-          // ✅ MapTiler tile layer
           TileLayer(
             urlTemplate:
                 "https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=gvJVxOP19NCLPrlcwUX2",
             userAgentPackageName: 'com.example.app',
           ),
 
-          // Marker Layer
           MarkerLayer(
             markers: [
               Marker(

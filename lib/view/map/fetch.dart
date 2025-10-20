@@ -9,10 +9,14 @@ class Fetch extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-           backgroundColor: Colors.orange,
+        backgroundColor: Colors.orange,
         centerTitle: true,
         automaticallyImplyLeading: false,
-        title: const Text("Fetch Screen",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),)),
+        title: const Text(
+          "Fetch Screen",
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        ),
+      ),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance.collection('locations').snapshots(),
         builder: (context, snapshot) {
@@ -26,20 +30,16 @@ class Fetch extends StatelessWidget {
               final lat = docs[index]['latitude'];
               final lng = docs[index]['longitude'];
 
-              // ✅ Convert Firestore timestamp to DateTime
               final timestamp = docs[index]['timestamp'];
               DateTime dateTime;
 
               if (timestamp is Timestamp) {
                 dateTime = timestamp.toDate();
               } else if (timestamp is int) {
-                // in case timestamp is stored as milliseconds
                 dateTime = DateTime.fromMillisecondsSinceEpoch(timestamp);
               } else {
-                dateTime = DateTime.now(); // fallback
+                dateTime = DateTime.now();
               }
-
-              // Format DateTime into readable string
               final formattedTime =
                   "${dateTime.day}-${dateTime.month}-${dateTime.year} ${dateTime.hour}:${dateTime.minute}:${dateTime.second}";
 
