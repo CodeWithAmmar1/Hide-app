@@ -9,7 +9,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.app"
+    namespace = "com.user_side.app"
     compileSdk = 35
     ndkVersion = "27.0.12077973"
 
